@@ -17,5 +17,4 @@ class Node:
         self.operation = operation
 
     def p_node(self):
-        print("L: " + str(self.left) + " R: " + str(self.right))
-        print("OP: ", self.operation)
+        print("L: " + str(self.left) + " OP: ", str(self.operation) + " R: " + str(self.right))
