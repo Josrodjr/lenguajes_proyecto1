@@ -93,4 +93,22 @@ def create_node(operation_array):
 
                 # print(operation_array[0])
 
-    return operation_array[0]                                                                                                                                                                                                                                                                    
+    return operation_array[0]
+
+def name_parents(tree, parent):
+
+    if isinstance(tree.left, Node):
+        # repeat this same method for the left side
+        tree.parent = parent
+        name_parents(tree.left, tree)
+    else:
+        # just name the last node and do not loop
+        tree.parent = parent
+        
+    if isinstance(tree.right, Node):
+        # repeat this same method for the right side
+        tree.parent = parent
+        name_parents(tree.right, tree)
+    else:
+        # just name the last node and do not loop
+        tree.parent = parent
