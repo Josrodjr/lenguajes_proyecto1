@@ -66,3 +66,63 @@ def build_node(operation_array):
         print(operation_array)
 
 build_node(operations)
+
+
+
+
+
+# or
+current_state_numerator = 7
+start_end = [[1, 1], [7, 7]]
+transitions = [[1, 0, 2],[2, 0, 3], [2, 0, 5], [3, 'VAL1', 4], [5, 'VAL2', 6], [4,0,7], [6,0,7]]
+
+operators = ['a', 'b']
+
+for transition in transitions:
+    if transition[1] != 0:
+        transition[1] =  operators.pop()
+
+
+
+# agregar un or dentnro de un or test
+start_end1 = [[1, 1], [7, 7]]
+transitions1 = [[1, 0, 2],[2, 0, 3], [2, 0, 5], [3, 'VAL1', 4], [5, 0, 6], [4,0,7], [6,0,7]]
+
+# change the numerator of each interation
+for state in start_end1:
+    state[0] += current_state_numerator
+    state[1] += current_state_numerator
+
+for transition in transitions1:
+    transition[0] += current_state_numerator
+    transition[2] += current_state_numerator
+
+for transition in transitions1:
+    if transition[1] != 0:
+        # add kleene operation from base node to start
+        transition[1] = 0
+        transition[2] = start_end[0][0]
+        # add end node to operations
+        transitions1.append([start_end[1][0], 0, transition[2]])
+
+transitions = transitions + transitions1
+
+
+# start at the deepest node found building the tree
+# def build_NFA(tree, current_node, current_nfa):
+#     if tree == current_node:
+#         # do one last operation and return the finished NFA
+#         # check if node type
+#         left_op = current_node.left
+#         right_op = current_node.right
+#         if isinstance(left_op, Node):
+#             # if there is no automata formed until now
+#             if len(left_op.automata) == 0:
+#                 # throw build_NFA from this point
+#                 left_op.automata = build_NFA(left_op) 
+
+
+#         if current_node.operation == '|':
+            
+#     else:
+#         # do operation and continue climbing

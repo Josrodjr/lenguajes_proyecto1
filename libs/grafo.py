@@ -15,7 +15,7 @@ def graficadora(transiciones, estados_finales):
     f.view()
 
 
-init_end = [[2, 2]]
-transitions = [[0, 'a', 1],[1, 'b', 2]]
+# init_end = [[2, 2]]
+# transitions = [[0, 'a', 1],[1, 'b', 2]]
 
-graficadora(transitions, init_end)
+# graficadora(transitions, init_end)

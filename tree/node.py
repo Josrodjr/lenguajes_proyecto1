@@ -4,6 +4,7 @@ class Node:
     left = ''
     right = ''
     operation = ''
+    automata = {}
 
     def __init__(self, left, right, n_id):
         self.left = left

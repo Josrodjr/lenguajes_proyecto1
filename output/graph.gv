@@ -1,8 +1,24 @@
 digraph "graph" {
 	rankdir=LR size="8,5"
 	node [shape=doublecircle]
-	2
+	8
+	11
 	node [shape=circle]
-	0 -> 1 [label=a]
-	1 -> 2 [label=b]
+	8 -> 22 [label=0]
+	9 -> 10 [label=0]
+	10 -> 11 [label=a]
+	25 -> 9 [label=0]
+	22 -> 23 [label=0]
+	23 -> 15 [label=0]
+	24 -> 25 [label=0]
+	24 -> 23 [label=0]
+	22 -> 25 [label=0]
+	21 -> 24 [label=0]
+	15 -> 16 [label=0]
+	16 -> 17 [label=0]
+	16 -> 19 [label=0]
+	17 -> 18 [label=c]
+	19 -> 20 [label=0]
+	18 -> 21 [label=0]
+	20 -> 21 [label=0]
 }

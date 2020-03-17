@@ -53,6 +53,17 @@ def parse_input(text):
     return parsed
 
 
+
+def remove_empty(operations_array):
+    for i in range(len(operations_array)):
+        if isinstance(operations_array[i], list):
+            operations_array[i] = remove_empty(operations_array[i])
+        else:
+            if operations_array[i] == '':
+                operations_array.remove('')
+    return operations_array
+
+
 # test_clause2 = '(a|b)* palabra palabra palabra'
 # test_clause = '(palabra (letra|letra)* a a b)* a'
 # a = parse_input(test_clause)
