@@ -126,3 +126,38 @@ transitions = transitions + transitions1
             
 #     else:
 #         # do operation and continue climbing
+
+
+
+def fill_node(Complete_tree, Current_node):
+    # check if current_node is missing left or right arguments
+    if isinstance(Current_node.left, Node):
+        if len(Current_node.left.automata) == 0:
+            # left node is NODE and empty automata
+            Current_node.left.automata = fill_node(Complete_tree, Current_node.left)
+            # check right side
+            if isinstance(Current_node.right, Node):
+                if len(Current_node.right.automata) == 0:
+                    Current_node.right.automata = fill_node(Complete_tree, Current_node.right)
+                else:
+                    # Both sides NODE and automata in them
+                    return automatize_Node(Current_node)       
+        else:
+            # Left node is NODE and has an automata
+            if isinstance(Current_node.right, Node):
+                if len(Current_node.right.automata) == 0:
+                    Current_node.right.automata = fill_node(Complete_tree, Current_node.right)
+                else:
+                    # Both sides NODE and automata in them
+                    return automatize_Node(Current_node) 
+    else:
+        # left side not node
+        if isinstance(Current_node.right, Node):
+                if len(Current_node.right.automata) == 0:
+                    Current_node.right.automata = fill_node(Complete_tree, Current_node.right)
+                else:
+                    # left side not node right side NODE with automata in it
+                    return automatize_Node(Current_node) 
+        else:
+            # none are NODE construct automata with reg parameters
+            return automatize_Node(Current_node)
