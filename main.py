@@ -44,5 +44,44 @@ def fill_tree(tree):
 fill_tree(tree)
 print(tree.automata)
 
-graficadora(tree.automata['transitions'], tree.automata['start_end'])
+# graficadora(tree.automata['transitions'], tree.automata['start_end'])
 
+
+# hacer la simulacion del automata para una cadena de strings
+
+def e_closure(automata, state):
+    transitions = automata['transitions']
+    reachable_states = set()
+    # iterate over the transitions searching for reachable states of first state
+    for transition in transitions:
+        if transition[0] == state:
+            if transition[1] == 0:
+                reachable_states.add(transition[2])
+
+    # iterate over the found reachable states until something changes
+    return reachable_states
+
+
+def get_eclosure(tree, init_state):
+    e1 = set()
+    e2 = set()
+    e1.add(init_state)
+
+    while e2 != e1:
+        e2 = copy.deepcopy(e1)
+        t_set = copy.deepcopy(e1)
+        for value in e1:
+            new = e_closure(tree.automata, value)
+            for result in new:
+                t_set.add(result)
+        e1 = copy.deepcopy(t_set)
+    
+    return e1
+
+
+init_state = tree.automata['start_end'][0][0]
+
+print(get_eclosure(tree, init_state))
+
+
+# print(e_closure(tree.automata, init_state))
