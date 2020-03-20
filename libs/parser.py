@@ -64,6 +64,27 @@ def remove_empty(operations_array):
     return operations_array
 
 
+def pre_parse_input(text_array):
+    new_array = []
+    for value in text_array:
+        if isinstance(value, list):
+            value = pre_parse_input(value)
+        # check if values is operand 
+            new_array.append(value)
+        else:
+            if value in operandos:
+                new_array.append(value)
+                continue
+            else:
+                # check if value is epsion
+                # if value == 'ε':
+                #     value = 0
+                value = ord(str(value))
+                value = str(value)
+                if value == '949':
+                    value = '0'
+                new_array.append(value)
+    return new_array
 # test_clause2 = '(a|b)* palabra palabra palabra'
 # test_clause = '(palabra (letra|letra)* a a b)* a'
 # a = parse_input(test_clause)

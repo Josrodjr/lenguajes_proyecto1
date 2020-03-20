@@ -258,3 +258,19 @@ def create_automata(tree):
         else:
             # left is not node, right is not either
             tree.automata = automatize_Node(tree)
+
+def fill_tree(tree):
+    # do bottom one time
+    create_automata_last(tree)
+    while len(tree.automata) == 0:
+        # do leaves one by one from bottom
+        create_automata(tree)
+
+def after_automata_cleanup(tree):
+    for value in tree.automata['transitions']:
+        value[1] = int(value[1])
+
+def automata_to_print_cleanup(tree):
+    for value in tree.automata['transitions']:
+        if value[1] != 0:
+            value[1] = chr(value[1])

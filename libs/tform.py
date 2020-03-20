@@ -51,6 +51,8 @@ def emulate_NFA(textstring, tree):
     e_closure = get_eclosure(tree, init_state)
     # iterate over the textstring to see if advancing over the states in the eclosure takes us somewhere
     for char in textstring:
+        # replace the char with the ordinal value
+        char = ord(char)
         mov_states = mov(tree.automata, e_closure, char)
         # if no reachable states
         if len(mov_states) == 0:
