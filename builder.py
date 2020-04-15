@@ -56,7 +56,7 @@ def create_node(operation_array):
 
             # select the hightest precedence one and build the tree from it
             highest = current_ops[0]
-            for value in current_ops:
+            for value in current_ops[::-1]:
                 if precedence[value[0]] >= precedence[highest[0]]:
                     highest = value
 
@@ -68,6 +68,9 @@ def create_node(operation_array):
                 l_value = copy.deepcopy(operation_array[highest[1]-1])
                 r_value = copy.deepcopy(operation_array[highest[1]+1])
 
+                # current spot in the list
+                spot = highest[1]-1
+
                 # pop from original array the values of both operands and the operator
                 operation_array.pop(highest[1]+1)
                 operation_array.pop(highest[1])
@@ -77,13 +80,15 @@ def create_node(operation_array):
                 node = Node(l_value, r_value, 0)
                 node.add_operation(highest[0])
 
-                operation_array.append(node)
-                # print(operation_array)
+                operation_array.insert(spot, node)
 
 
             if curr_type == 'un':
                 # get previous vaue and build node
                 r_value = operation_array[highest[1]-1]
+
+                # current spot in the list
+                spot = highest[1]-1
 
                 operation_array.pop(highest[1])
                 operation_array.pop(highest[1]-1)
@@ -91,9 +96,7 @@ def create_node(operation_array):
                 node = Node(0, r_value, 0)
                 node.add_operation(highest[0])
 
-                operation_array.append(node)
-
-                # print(operation_array[0])
+                operation_array.insert(spot, node)
 
     return operation_array[0]
 

@@ -69,3 +69,10 @@ def emulate_NFA(textstring, tree):
         return 'yes'
     else:
         return 'no'
+
+
+def check_completion(e_closure, complete_state):
+    if complete_state in e_closure:
+        return 1
+    else:
+        return 0

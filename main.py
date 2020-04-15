@@ -19,9 +19,11 @@ from libs.tform import get_eclosure, e_closure, mov, emulate_NFA
 from libs.txtgen import get_params_for_txt, dict_to_txt
 # for gui
 from libs.gui import menu
+# for DFA generation
+from finite_automata.dfa import fill_transitions, iter_approved_ids, generate_dfa
 
 # base values
-regular_expression = 'a b'
+regular_expression = '(b|b)* a b b (a|b)*'
 w_chain = 'ab'
 exit = 0
 
@@ -54,9 +56,17 @@ while (exit == 0):
         dict_params = get_params_for_txt(tree)
         dict_to_txt(dict_params, 'automata_struct')
         # replace all values that are ints in transitions with the values that character produces
-        automata_to_print_cleanup(tree)
-        # print using the nod lib
-        graficadora(tree.automata['transitions'], tree.automata['start_end'])
+
+        fill_transitions(tree)
+        
+        generate_dfa(tree)
+
+        # automata_to_print_cleanup(tree)
+        # # print using the nod lib
+        # graficadora(tree.automata['transitions'], tree.automata['start_end'])
+
+
+
     if option == 0:
         exit = 1
 
